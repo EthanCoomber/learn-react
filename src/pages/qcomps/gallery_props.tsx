@@ -1,39 +1,69 @@
+interface AwardProps {
+  count: number;
+  list: string;
+}
+
+interface ProfileImageProps {
+  imageUrl: string;
+  name: string;
+}
+
+interface ProfileDetailsProps {
+  profession: string;
+  awards: AwardProps;
+  discovery: string;
+}
+
 interface ProfileProps {
   name: string;
   imageUrl: string;
   profession: string;
-  awards: {
-    count: number;
-    list: string;
-  };
+  awards: AwardProps;
   discovery: string;
 }
 
-function Profile({ name, imageUrl, profession, awards, discovery }: ProfileProps) {
+function ProfileImage({ imageUrl, name }: ProfileImageProps) {
+  return (
+    <img
+      className="avatar"
+      src={imageUrl}
+      alt={name}
+      width={70}
+      height={70}
+    />
+  );
+}
+
+function ProfileDetails({ profession, awards, discovery }: ProfileDetailsProps) {
+  return (
+    <ul>
+      <li>
+        <b>Profession: </b>
+        {profession}
+      </li>
+      <li>
+        <b>Awards: {awards.count} </b>
+        ({awards.list})
+      </li>
+      <li>
+        <b>Discovered: </b>
+        {discovery}
+      </li>
+    </ul>
+  );
+}
+
+function Profile(props: ProfileProps) {
+  const { name, imageUrl, profession, awards, discovery } = props;
   return (
     <section className="profile">
       <h2>{name}</h2>
-      <img
-        className="avatar"
-        src={imageUrl}
-        alt={name}
-        width={70}
-        height={70}
+      <ProfileImage imageUrl={imageUrl} name={name} />
+      <ProfileDetails 
+        profession={profession}
+        awards={awards}
+        discovery={discovery}
       />
-      <ul>
-        <li>
-          <b>Profession: </b>
-          {profession}
-        </li>
-        <li>
-          <b>Awards: {awards.count} </b>
-          ({awards.list})
-        </li>
-        <li>
-          <b>Discovered: </b>
-          {discovery}
-        </li>
-      </ul>
     </section>
   );
 }
