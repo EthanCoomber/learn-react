@@ -14,10 +14,8 @@ const initialList = [
  * Decouple the lists, that is, checking a box in one list should have no impact on the other list?
  */
 export default function BucketList() {
-  const [myList, setMyList] = useState(initialList);
-  const [yourList, setYourList] = useState(
-    initialList
-  );
+  const [myList, setMyList] = useState(initialList.map(item => ({...item})));
+  const [yourList, setYourList] = useState(initialList.map(item => ({...item})));
 
   /**
    * The function updates the seen property of the artwork with the given id in the mylist.
@@ -25,13 +23,12 @@ export default function BucketList() {
    * @param nextSeen - the value with which to update the seen property of the artwork
    */
   function handleToggleMyList(artworkId: number, nextSeen: boolean) {
-    const tmpList = myList.map(e => {
-        if (e.id === artworkId) {
-            e.seen = nextSeen
-        }
-        return e
-    });
-    setMyList(tmpList);
+    setMyList(myList.map(artwork => {
+      if (artwork.id === artworkId) {
+        return {...artwork, seen: nextSeen};
+      }
+      return artwork;
+    }));
   }
 
   /**
@@ -40,13 +37,12 @@ export default function BucketList() {
    * @param nextSeen - the value with which to update the seen property of the artwork
    */
   function handleToggleYourList(artworkId: number, nextSeen: boolean) {
-    const tmpList = yourList.map(e => {
-        if (e.id === artworkId) {
-            e.seen = nextSeen
-        }
-        return e
-    });
-    setYourList(tmpList);
+    setYourList(yourList.map(artwork => {
+      if (artwork.id === artworkId) {
+        return {...artwork, seen: nextSeen};
+      }
+      return artwork;
+    }));
   }
 
   return (

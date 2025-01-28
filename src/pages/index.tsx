@@ -3,23 +3,28 @@
 // import { Inter } from 'next/font/google'
 // import styles from '@/styles/Home.module.css'
 // import ToDos from './components/todos'
-import Recipes from './qcomps/recipes'
-import GalleryProps from './qcomps/gallery_props'
-import PackingList from './qcomps/props_item'
-import List from './qcomps/list_keys_id'
-
+import State from './qcomps/state'
+import StuckForm from './qcomps/stuckForm'
+import ShoppingCart from './qcomps/shoppingCart'
+import UpdObjectsForm from './qcomps/updObjectsForm'
+import ArtistsRemoveArr from './qcomps/artistsRemoveArr'
+import ArrObj from './qcomps/arrObj'
 export default function Home() {
   return (
     <div>
       <h1>Home</h1>
-      <h2>Recipes</h2>
-      <Recipes />
-      <h2>GalleryProps</h2>
-      <GalleryProps />
-      <h2>PackingList</h2>
-      <PackingList />
-      <h2>List</h2>
-      <List />
+      <h2>State</h2>
+      <State />
+      <h2>StuckForm</h2>
+      <StuckForm />
+      <h2>ShoppingCart</h2>
+      <ShoppingCart />
+      <h2>UpdObjectsForm</h2>
+      <UpdObjectsForm />
+      <h2>ArtistsRemoveArr</h2>
+      <ArtistsRemoveArr />
+      <h2>ArrObj</h2>
+      <ArrObj />
     </div>
   )
 }

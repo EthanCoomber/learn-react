@@ -5,6 +5,9 @@ import { sculptureList } from '../../data/data';
  * The Gallery component displays a sculpture from the sculptureList array.
  * The component has a bug that causes the component to crash with a runtime error.
  * Identify the reason and fix the bug.
+ * 
+ * The bug occurs when clicking "Next" at the end of the list since there's no bounds checking.
+ * This has been fixed by adding a check to prevent index from exceeding array length.
  */
 export default function Gallery() {
   /**
@@ -20,7 +23,9 @@ export default function Gallery() {
    * The handleNextClick function increments the index state variable to display the next sculpture.
    */
   function handleNextClick() {
-    setIndex(index + 1);
+    if (index < sculptureList.length - 1) {
+      setIndex(index + 1);
+    }
   }
 
   /**
