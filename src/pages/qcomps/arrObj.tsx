@@ -14,8 +14,24 @@ const initialList = [
  * Decouple the lists, that is, checking a box in one list should have no impact on the other list?
  */
 export default function BucketList() {
-  const [myList, setMyList] = useState(initialList.map(item => ({...item})));
-  const [yourList, setYourList] = useState(initialList.map(item => ({...item})));
+  const [myList, setMyList] = useState(initialList);
+  const [yourList, setYourList] = useState(initialList);
+
+  /**
+   * The function updates the seen property of the artwork with the given id in the list.
+   * @param list - the list of artworks
+   * @param id - the id of the artwork to toggle
+   * @param nextSeen - the value with which to update the seen property of the artwork
+   * @returns the updated list of artworks
+   */
+  const toggleList = (list: typeof initialList, id: number, nextSeen: boolean) => {
+    return (list.map(artwork => {
+      if (artwork.id === id) {
+        return {...artwork, seen: nextSeen};
+      }
+      return artwork;
+    }));
+  }
 
   /**
    * The function updates the seen property of the artwork with the given id in the mylist.
@@ -23,12 +39,7 @@ export default function BucketList() {
    * @param nextSeen - the value with which to update the seen property of the artwork
    */
   function handleToggleMyList(artworkId: number, nextSeen: boolean) {
-    setMyList(myList.map(artwork => {
-      if (artwork.id === artworkId) {
-        return {...artwork, seen: nextSeen};
-      }
-      return artwork;
-    }));
+    setMyList(toggleList(myList, artworkId, nextSeen));
   }
 
   /**
@@ -37,12 +48,7 @@ export default function BucketList() {
    * @param nextSeen - the value with which to update the seen property of the artwork
    */
   function handleToggleYourList(artworkId: number, nextSeen: boolean) {
-    setYourList(yourList.map(artwork => {
-      if (artwork.id === artworkId) {
-        return {...artwork, seen: nextSeen};
-      }
-      return artwork;
-    }));
+    setYourList(toggleList(yourList, artworkId, nextSeen));
   }
 
   return (
